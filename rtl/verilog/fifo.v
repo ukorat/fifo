@@ -53,10 +53,10 @@ module fifo
    assign empty_o = full_or_empty & empty_int;
    
    always @(posedge clk) begin
-      if (wr_en_i)
+	   if (wr_en_i && !full_o)
 	write_pointer <= write_pointer + 1'd1;
 
-      if (rd_en_i)
+	   if (rd_en_i && !empty)
 	read_pointer <= read_pointer + 1'd1;
 
       if (rst) begin
